@@ -33,7 +33,7 @@ interface GeneralType {
 
 
 function App() {
-const [todolists, setTodolists]=useState<TodolistType[]>([])
+const [todolists, setTodolists]=useState<TodolistType[] | null>(null)
 
     useEffect(()=>{
         axios.get<GeneralType>('https://todolists.samuraijs.com/api/1.0/todolists?pageNumber=1&pageSize=10')
@@ -45,7 +45,7 @@ const [todolists, setTodolists]=useState<TodolistType[]>([])
 
   return (
     <>
-        {todolists.map((todo)=>{
+    {todolists === null? <p>Loading</p>: todolists.map((todo)=>{
             return (
                 <div key={todo.id}>
                     <h2>
